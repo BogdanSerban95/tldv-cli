@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # Three runtime dependencies and a handful of dev tools: one PR a week beats six.
+      dev-dependencies:
+        dependency-type: development
+      runtime-dependencies:
+        dependency-type: production
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly

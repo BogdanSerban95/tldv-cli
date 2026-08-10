@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Matches the `engines.node` floor and the current LTS lines.
+        node: ["20.19", "22", "24"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      - run: npm test
+
+      - run: npm run build
+
+      # The build can succeed while the entry point fails to load — bad import, bad shebang.
+      - name: Smoke-test the built binary
+        run: |
+          node dist/tldv.js --version
+          node dist/tldv.js --help > /dev/null
+          node dist/tldv.js completion zsh > /dev/null
