@@ -102,7 +102,7 @@ async function readKey(fromStdin: boolean, out: Output): Promise<string> {
   out.note(`Create a key at ${API_KEYS_URL}`);
   const value = await password({
     message: "tl;dv API key",
-    validate: (input) => (input.trim() ? undefined : "Enter a key"),
+    validate: (input) => (input?.trim() ? undefined : "Enter a key"),
   });
   if (isCancel(value)) throw new TldvError("Cancelled.");
   return value.trim();
