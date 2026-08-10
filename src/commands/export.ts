@@ -8,6 +8,7 @@ import { dateKey } from "../core/dates.js";
 import { ApiError, TldvError, UsageError } from "../core/errors.js";
 import { slugify } from "../core/filenames.js";
 import { mapPool } from "../core/pool.js";
+import { prepareNotes } from "../formats/notes.js";
 import {
   formatTranscript,
   isTranscriptFormat,
@@ -254,7 +255,7 @@ async function exportMeeting(
   if (needsNotes) {
     const notes = await ctx.api.getNotes(meeting.id).catch(swallowNotFound);
     if (notes?.markdown.trim()) {
-      writeFileSync(notesPath, ensureNewline(notes.markdown), "utf8");
+      writeFileSync(notesPath, prepareNotes(notes.markdown), "utf8");
       written.push(basename(notesPath));
     } else {
       empty = empty ? `${empty}, no notes` : "no notes";
@@ -341,10 +342,6 @@ function hasVideo(manifest: Manifest, meetingId: string): boolean {
 
 function mergeFiles(previous: string[] | undefined, added: string[]): string[] {
   return [...new Set([...(previous ?? []), ...added])].sort();
-}
-
-function ensureNewline(value: string): string {
-  return value.endsWith("\n") ? value : `${value}\n`;
 }
 
 function readManifest(outDir: string): Manifest {

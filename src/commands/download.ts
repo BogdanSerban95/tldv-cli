@@ -70,7 +70,10 @@ export function downloadCommand(): Command {
           },
         );
 
-        spinner.succeed(`${path} (${humanBytes(bytes)})`);
+        // Not spinner.succeed: the spinner is a no-op off a TTY, and a download that writes
+        // a 45 MB file deserves a confirmation line in a log too.
+        spinner.stop();
+        ctx.out.success(`${path} (${humanBytes(bytes)})`);
       } catch (error) {
         spinner.stop();
         throw error;

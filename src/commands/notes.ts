@@ -6,6 +6,7 @@ import { createContext } from "../context.js";
 import { ExitCode, TldvError } from "../core/errors.js";
 import { defaultFilename } from "../core/filenames.js";
 import { resolveMeeting, resolveMeetingId } from "../core/resolve-meeting.js";
+import { prepareNotes } from "../formats/notes.js";
 import { isDirectory } from "../ui/output.js";
 import { createSpinner } from "../ui/spinner.js";
 
@@ -62,10 +63,7 @@ export function notesCommand(): Command {
           ? defaultFilename(meeting, "notes.md")
           : `${meetingId}.notes.md`;
         const target = ctx.out.resolveTarget(options.out, fallbackName);
-        ctx.out.write(
-          target,
-          notes.markdown.endsWith("\n") ? notes.markdown : `${notes.markdown}\n`,
-        );
+        ctx.out.write(target, prepareNotes(notes.markdown));
 
         if (target.kind === "file") {
           const topics = notes.topics.length;

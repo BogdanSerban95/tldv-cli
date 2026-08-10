@@ -13,10 +13,17 @@ tldv export --from 30d -f md,srt --notes -d ./meetings
 Requires Node 20.19 or newer.
 
 ```bash
+npm install -g tldv-cli    # once published
+npx tldv-cli ls            # without installing
+```
+
+From source:
+
+```bash
 git clone <this repo> && cd tldv-cli
 npm install
 npm run build
-npm link          # puts `tldv` on your PATH
+npm link                   # puts `tldv` on your PATH
 ```
 
 During development, `npm run dev -- ls --from 7d` runs the TypeScript directly.

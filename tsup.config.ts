@@ -5,18 +5,11 @@ export default defineConfig({
   format: ["esm"],
   target: "node20",
   platform: "node",
-  // Bundle dependencies so `npx tldv-cli` fetches one file instead of resolving a tree.
-  noExternal: [/.*/],
+  // Dependencies stay external. Inlining them would mean redistributing their MIT/ISC text
+  // alongside the package, and npm resolves five pure-JS packages fast enough that the
+  // single-file build is not worth that obligation.
   clean: true,
   sourcemap: true,
   minify: false,
-  // Dependencies are CJS; bundling them into ESM leaves esbuild's `__require` shim, which
-  // throws on `require("events")` unless a real require exists in module scope.
-  banner: {
-    js: [
-      "#!/usr/bin/env node",
-      "import { createRequire as __tldvCreateRequire } from 'node:module';",
-      "const require = __tldvCreateRequire(import.meta.url);",
-    ].join("\n"),
-  },
+  banner: { js: "#!/usr/bin/env node" },
 });
