@@ -9,6 +9,14 @@
     "tldv": "./dist/tldv.js"
   },
   "files": ["dist", "README.md", "LICENSE"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BogdanSerban95/tldv-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BogdanSerban95/tldv-cli/issues"
+  },
+  "homepage": "https://github.com/BogdanSerban95/tldv-cli#readme",
   "engines": {
     "node": ">=20.19"
   },

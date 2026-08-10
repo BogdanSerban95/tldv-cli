@@ -20,7 +20,7 @@ npx tldv-cli ls            # without installing
 From source:
 
 ```bash
-git clone <this repo> && cd tldv-cli
+git clone https://github.com/BogdanSerban95/tldv-cli.git && cd tldv-cli
 npm install
 npm run build
 npm link                   # puts `tldv` on your PATH
@@ -147,7 +147,7 @@ tl;dv documents no rate limits, so 429 and 5xx responses are retried with expone
 npm test          # vitest
 npm run typecheck # tsc --noEmit
 npm run lint      # biome
-npm run build     # tsup → dist/tldv.js, dependencies bundled
+npm run build     # tsup → dist/tldv.js
 ```
 
 ## License
