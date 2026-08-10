@@ -1,0 +1,38 @@
+{
+  "name": "tldv-cli",
+  "version": "0.1.0",
+  "description": "Command-line client for the tl;dv API: list meetings, export transcripts and notes, download recordings.",
+  "keywords": ["tldv", "cli", "transcript", "meetings", "subtitles"],
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "tldv": "./dist/tldv.js"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/bin.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src tests",
+    "format": "biome check --write src tests",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "commander": "^14.0.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
