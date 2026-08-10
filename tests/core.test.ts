@@ -4,7 +4,7 @@ import { defaultFilename, slugify } from "../src/core/filenames.js";
 import { mapPool } from "../src/core/pool.js";
 import { extractMeetingId } from "../src/core/resolve-meeting.js";
 import { humanBytes } from "../src/ui/output.js";
-import { renderTable, truncate } from "../src/ui/table.js";
+import { displayWidth, renderTable, truncate } from "../src/ui/table.js";
 
 describe("extractMeetingId", () => {
   it("takes a bare object id", () => {
@@ -92,8 +92,9 @@ describe("table", () => {
       [["2026-08-10", "a very long meeting name that will not fit"]],
       24,
     );
+    // Visible width, not raw length: the header cells are dimmed, and CI turns color on.
     for (const line of output.trimEnd().split("\n")) {
-      expect(line.length).toBeLessThanOrEqual(24);
+      expect(displayWidth(line)).toBeLessThanOrEqual(24);
     }
   });
 });
