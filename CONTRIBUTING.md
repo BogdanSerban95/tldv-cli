@@ -82,7 +82,10 @@ git push --follow-tags
 ```
 
 Pushing the tag triggers `.github/workflows/release.yml`, which reinstalls, runs the checks, and
-publishes. It needs an `NPM_TOKEN` repository secret with publish rights.
+publishes. There is no publish token: the workflow authenticates over OIDC against the trusted
+publisher configured for the package on npmjs.com, which is pinned to this repository and to
+`release.yml` by name. Renaming that workflow file breaks releasing until the publisher is
+updated to match.
 
 To dry-run what would ship: `npm pack --dry-run`. The tarball should contain `dist/`, `README.md`,
 `LICENSE`, and `package.json` — nothing else.
