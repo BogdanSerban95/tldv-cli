@@ -1,5 +1,7 @@
 # tldv-cli
 
+> An unofficial, community-maintained client. Not affiliated with or endorsed by tl;dv.
+
 Command-line client for the [tl;dv API](https://doc.tldv.io). List meetings, write transcripts and
 notes to files, download recordings, and bulk-export a date range to a directory.
 
