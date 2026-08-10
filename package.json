@@ -1,7 +1,7 @@
 {
   "name": "tldv-cli",
   "version": "0.1.0",
-  "description": "Command-line client for the tl;dv API: list meetings, export transcripts and notes, download recordings.",
+  "description": "Unofficial command-line client for the tl;dv API: list meetings, export transcripts and notes, download recordings.",
   "keywords": ["tldv", "cli", "transcript", "meetings", "subtitles"],
   "license": "MIT",
   "type": "module",
